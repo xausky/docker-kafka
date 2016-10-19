@@ -5,13 +5,15 @@ MAINTAINER xausky xausky@gmail.com
 ENV KAFKA_VERSION 0.10.0.1
 ENV SCALA_VERSION 2.10
 
-COPY init.sh /
+WORKDIR /
 
-RUN /init.sh
+COPY initialize.sh .
 
-COPY entrypoint.sh /kafka
+RUN ./initialize.sh
 
 WORKDIR /kafka
+
+COPY entrypoint.sh .
 
 ENTRYPOINT ["./entrypoint.sh"]
 
